@@ -14,7 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         AppComponent,
         MessagesComponent,
         DashboardComponent,
-       
+        
     ],
     providers: [],
     bootstrap: [AppComponent],

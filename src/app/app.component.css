@@ -1,6 +1,12 @@
 /* AppComponent's private CSS styles */
+
+.container-css{
+    width: 95%;
+    margin: 5px auto;
+}
 h1 {
     margin-bottom: 0;
+    font-size:xx-large;
   }
   nav a {
     padding: 1rem;

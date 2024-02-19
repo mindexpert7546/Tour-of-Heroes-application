@@ -1,0 +1,7 @@
+import heroes.Heroes
+
+model {
+	Heroes heroes
+}
+
+json tmpl.heroes(heroes)
