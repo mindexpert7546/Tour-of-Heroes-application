@@ -16,6 +16,7 @@ import { HeroService } from '../hero.service';
   imports: [FormsModule, NgIf, UpperCasePipe],
 })
 export class HeroDetailComponent {
+background: any;
 
   constructor(
     private route: ActivatedRoute,

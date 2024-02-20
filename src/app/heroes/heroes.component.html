@@ -8,7 +8,8 @@
 
 <div>
   <label for="new-hero">Hero name: </label>
-  <input style="border: solid 1px black;" id="new-hero" #heroName />
+  <input style="border: solid 1px black;" id="new-hero" #heroName 
+         (keyup.enter)="addHero(heroName.value); heroName.value=''" />
 
   <!-- (click) passes input value to add() and then clears the input -->
   <button type="button" class="add-button" (click)="addHero(heroName.value); heroName.value=''">
