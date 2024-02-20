@@ -37,11 +37,21 @@ getHero(id: number): Observable<Hero> {
   );
 }
 
+
 /** PUT: update the hero on the server */
-updateHero(hero: Hero): Observable<any> {
-  return this.http.put(this.heroesUrl, hero).pipe(
-    tap(_ => this.log(`updated hero id=${hero.id}`)),
-   
-  );
+updateHero(id:number,updateHero: Hero): Observable<any> {
+  return this.http.put<Hero>(this.heroesUrl+'hero/data/'+id,updateHero);
 }
+
+// add the hero 
+addHero(addHereRequest:Hero):Observable<Hero[]>{
+  return this.http.post<Hero[]>(this.heroesUrl + 'hero/data/',addHereRequest);
+}
+
+
+// to delte the hero 
+deleteBus(id:number):Observable<Hero>
+  {
+    return this.http.delete<Hero>(this.heroesUrl+'hero/data/'+id);
+  }
 }

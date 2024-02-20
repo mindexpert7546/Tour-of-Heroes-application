@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import {NgIf, UpperCasePipe} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {Hero} from '../hero';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { HeroService } from '../hero.service';
@@ -16,10 +16,12 @@ import { HeroService } from '../hero.service';
   imports: [FormsModule, NgIf, UpperCasePipe],
 })
 export class HeroDetailComponent {
+
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ){}
   @Input() hero?: Hero;
 
@@ -38,9 +40,26 @@ export class HeroDetailComponent {
   }
 
   save():void{
-    if(this.hero){
-      this.heroService.updateHero(this.hero).subscribe(()=>
-      this.goBack());
-    }
+   if(this.hero?.id){
+    this.heroService.updateHero(this.hero.id,this.hero).subscribe({
+      next:() =>{
+        this.goBack();
+      },
+      error: (err) => {
+        console.error('Error updating bus details', err);
+      }
+    });
+   }
   }
+
+  delete(id:number){
+   this.heroService.deleteBus(id).subscribe({
+    next:(response)=>
+      {
+        // this.getBusList();
+        this.goBack()
+      },
+   })
+  }
+
 }

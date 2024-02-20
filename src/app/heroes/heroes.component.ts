@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import { HEROES } from '../mock-heroes';
+import { Location } from '@angular/common';
 import {
   NgFor,
   NgIf,
@@ -31,7 +32,15 @@ import { HttpClientModule } from '@angular/common/http';
 export class HeroesComponent implements OnInit {
   heroes: Hero[] = [];
 
-  constructor(private heroService: HeroService, private messageService:MessageService) {}
+  addHeroes:Hero={
+    id: 0,
+    heroes: ''
+  }
+  constructor(
+    private heroService: HeroService,
+    private messageService:MessageService,
+    private location: Location,
+    ) {}
 
   ngOnInit(): void {
     this.getHeroes();
@@ -52,4 +61,23 @@ export class HeroesComponent implements OnInit {
   this.selectedHero = hero;
   this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
 }
+
+goBack(): void {
+  this.location.back();
+}
+
+// In your component
+addHero(heroes: string): void {
+  if (!heroes) { return; }
+  this.heroService.addHero({ heroes } as unknown as Hero).subscribe({
+    next: (hero) => {
+     this.goBack();
+    },
+    error: (err) => {
+      // Handle error
+    },
+    complete: () => this.goBack() // Or any other logic after completion
+  });
+}
+
 }
