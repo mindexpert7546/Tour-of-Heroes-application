@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeroService } from '../hero.service';
 import { Location } from '@angular/common';
 import { Hero } from '../hero';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private heroService:HeroService,
     private location: Location,
+    private messageService:MessageService
   ) {}
   ngOnInit(): void {
   
@@ -24,9 +26,13 @@ export class HomeComponent implements OnInit {
   
   // In your component
   addHero(heroes: string): void {
-    if (!heroes) { return; }
+    if (!heroes) {
+      // const isConfirmed = confirm('Hero must be required!');
+      alert("Hero must be required!")
+        return; }
     this.heroService.addHero({ heroes } as unknown as Hero).subscribe({
       next: (hero) => {
+      this.messageService.add(`New hero is added.`);
        this.goBack();
       },
       error: (err) => {

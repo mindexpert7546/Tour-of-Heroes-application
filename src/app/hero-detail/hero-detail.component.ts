@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { HeroService } from '../hero.service';
+import { MessageService } from '../message.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ background: any;
     private route: ActivatedRoute,
     private heroService: HeroService,
     private location: Location,
-    private router: Router
+    private router: Router,
+    private messageService:MessageService
   ){}
   @Input() hero?: Hero;
 
@@ -40,10 +42,13 @@ background: any;
     this.location.back();
   }
 
-  save():void{
+  update():void{
+    const isConfirmed = confirm('Are you sure you want to update this hero?');
+    if(isConfirmed){
    if(this.hero?.id){
     this.heroService.updateHero(this.hero.id,this.hero).subscribe({
       next:() =>{
+        this.messageService.add(`Selected id updated`);
         this.goBack();
       },
       error: (err) => {
@@ -52,15 +57,19 @@ background: any;
     });
    }
   }
+  }
 
   delete(id:number){
+  const isConfirmed = confirm('Are you sure you want to delete this hero?');
+  if(isConfirmed){
    this.heroService.deleteBus(id).subscribe({
     next:(response)=>
       {
-        // this.getBusList();
+        this.messageService.add(`${id} id is deleted.`);
         this.goBack()
       },
    })
+  }
   }
 
 }

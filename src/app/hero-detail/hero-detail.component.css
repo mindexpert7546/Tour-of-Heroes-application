@@ -14,7 +14,7 @@ label {
     padding: 1rem;
     border-radius: 4px;
     font-size: 1rem;
-    border:solid .5px black;
+    border:solid .5px rgb(0, 0, 0);
   }
   button:hover {
     background-color: #cfd8dc;
