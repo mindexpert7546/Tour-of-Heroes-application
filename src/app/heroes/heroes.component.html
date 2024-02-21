@@ -1,21 +1,39 @@
-<ul class="heroes">
+ <!-- <ul class="heroes">
   <li *ngFor="let hero of heroes">
     <a routerLink="/detail/{{hero.id}}">
       <span class="badge">{{hero.id}}</span> {{hero.heroes}}
     </a>
   </li>
-</ul>
+</ul> -->
 
-<div>
+
+<!-- <div>
   <label for="new-hero">Hero name: </label>
   <input style="border: solid 1px black;" id="new-hero" #heroName 
          (keyup.enter)="addHero(heroName.value); heroName.value=''" />
 
-  <!-- (click) passes input value to add() and then clears the input -->
   <button type="button" class="add-button" (click)="addHero(heroName.value); heroName.value=''">
 
     Add hero
   </button>
-</div>
+</div> -->
 
 <app-hero-detail [hero]="selectedHero"></app-hero-detail>
+<div class="w-full md:pr-10 md:py-6">
+  <div class="flex relative pb-12" *ngFor="let hero of heroes">
+    <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+      <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+    </div>
+    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 inline-flex items-center justify-center text-white relative z-10">
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+    </div>
+    <div class="flex-grow pl-4" >
+      <a routerLink="/detail/{{hero.id }}">
+        <span class="badge">{{hero.id}}.</span> {{hero.heroes}}
+      </a>
+    </div>
+  </div>
+</div>
